@@ -21,4 +21,15 @@ FROM `airy-web-509601-b3.ecommerce.ecommerce data`
 GROUP BY device
 ORDER BY view_to_cart_percent;
 ---------
-3.
+3.View-to-cart rate by product category
+SELECT
+  product_category,
+  SUM(view_item) AS product_views,
+  SUM(add_to_cart) AS add_to_carts,
+  ROUND(
+    SAFE_DIVIDE(SUM(add_to_cart), SUM(view_item)) * 100,
+    2
+  ) AS view_to_cart_percent
+FROM `airy-web-509601-b3.ecommerce.ecommerce data`
+GROUP BY product_category
+ORDER BY view_to_cart_percent;
